@@ -151,9 +151,11 @@ def parse_peppol_xml(xml_bytes, edocument_profile, edocument=None):
 		pi_data["supplier"] = seller_data.get("supplier")
 		pi_data["supplier_name"] = seller_data.get("name")
 
-		# Parse buyer (company) information
+		# Prefer the company detected on the EDocument, then the buyer in the XML
 		buyer_data = parse_peppol_buyer(root, namespaces)
-		pi_data["company"] = buyer_data.get("company") or get_default_company()
+		pi_data["company"] = (
+			(edocument and edocument.company) or buyer_data.get("company") or get_default_company()
+		)
 
 		# Check for Purchase Order - use matching_data if available
 		matched_po = None
