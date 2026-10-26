@@ -37,8 +37,8 @@ def get_edocument_fields(xml_bytes, edocument_profile):
 			return detector_func(xml_bytes)
 		except Exception as e:
 			frappe.log_error(
-				f"Error loading detector from path {edocument_profile.detector_path}: {e!s}",
-				"EDocument Detector Error",
+				title="EDocument Detector Error",
+				message=f"Error loading detector from path {edocument_profile.detector_path}: {e!s}",
 			)
 			# Fall through to empty result if loading fails
 

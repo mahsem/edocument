@@ -139,13 +139,13 @@ def validate_peppol_xml(xml_bytes, edocument_profile):
 		# Debug: Log validation results
 		if errors:
 			frappe.log_error(
-				f"Schematron validation errors for EDocument:\n{chr(10).join(errors)}",
-				"Schematron Validation Debug",
+				title="Schematron Validation Debug",
+				message=f"Schematron validation errors for EDocument:\n{chr(10).join(errors)}",
 			)
 		if warnings:
 			frappe.log_error(
-				f"Schematron validation warnings for EDocument:\n{chr(10).join(warnings)}",
-				"Schematron Validation Debug",
+				title="Schematron Validation Debug",
+				message=f"Schematron validation warnings for EDocument:\n{chr(10).join(warnings)}",
 			)
 		if errors:
 			result["is_valid"] = False

@@ -217,7 +217,7 @@ def parse_peppol_xml(xml_bytes, edocument_profile, edocument=None):
 		return pi_data
 
 	except Exception as e:
-		frappe.log_error(f"PEPPOL Parsing Error: {e!s}", "EDocument PEPPOL Parsing")
+		frappe.log_error(title="EDocument PEPPOL Parsing", message=f"PEPPOL Parsing Error: {e!s}")
 		raise
 
 

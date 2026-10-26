@@ -90,11 +90,11 @@ def validate_xml_structure(xml_bytes: bytes) -> bytes:
 		return etree.tostring(root, pretty_print=True, xml_declaration=True, encoding="UTF-8")
 	except etree.XMLSyntaxError as e:
 		error_msg = f"XML structure validation failed: {e!s}"
-		frappe.log_error(error_msg, "XML Validation")
+		frappe.log_error(title="XML Validation", message=error_msg)
 		raise ValueError(error_msg)
 	except Exception as e:
 		error_msg = f"XML parsing failed: {e!s}"
-		frappe.log_error(error_msg, "XML Validation")
+		frappe.log_error(title="XML Validation", message=error_msg)
 		raise ValueError(error_msg)
 
 
@@ -108,7 +108,7 @@ def validate_xml_against_xsd_file(xml_bytes: bytes, xsd_file_path: Path | str) -
 
 	if not xsd_path.exists():
 		error_msg = f"XSD schema file not found: {xsd_path}"
-		frappe.log_error(error_msg, "XSD Validation")
+		frappe.log_error(title="XSD Validation", message=error_msg)
 		raise FileNotFoundError(error_msg)
 
 	try:
@@ -124,11 +124,11 @@ def validate_xml_against_xsd_file(xml_bytes: bytes, xsd_file_path: Path | str) -
 		return etree.tostring(xml_root, pretty_print=True, xml_declaration=True, encoding="UTF-8")
 	except etree.XMLSchemaError as e:
 		error_msg = f"XSD validation failed: {e!s}"
-		frappe.log_error(error_msg, "XSD Validation")
+		frappe.log_error(title="XSD Validation", message=error_msg)
 		raise ValueError(error_msg)
 	except Exception as e:
 		error_msg = f"XSD schema load or validation failed: {e!s}"
-		frappe.log_error(error_msg, "XSD Validation")
+		frappe.log_error(title="XSD Validation", message=error_msg)
 		raise ValueError(error_msg)
 
 

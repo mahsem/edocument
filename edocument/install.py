@@ -199,4 +199,4 @@ def create_peppol_profile():
 		profile.insert(ignore_permissions=True)
 		frappe.db.commit()
 	except Exception as e:
-		frappe.log_error(f"Error creating PEPPOL profile: {e!s}", "EDocument Installation")
+		frappe.log_error(title="EDocument Installation", message=f"Error creating PEPPOL profile: {e!s}")
