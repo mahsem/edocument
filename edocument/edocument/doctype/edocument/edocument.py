@@ -46,7 +46,9 @@ def _detect_profile_from_xml(xml_bytes: bytes) -> str | None:
 					return profile["name"]
 
 	except Exception as e:
-		frappe.log_error(f"Error detecting profile from XML: {e!s}", "EDocument Profile Detection Error")
+		frappe.log_error(
+			title="EDocument Profile Detection Error", message=f"Error detecting profile from XML: {e!s}"
+		)
 
 	return None
 
@@ -272,8 +274,8 @@ class EDocument(Document):
 				# If detection fails (file not found, parsing error, etc.), log but don't block save
 				error_msg = str(e)
 				frappe.log_error(
-					f"Error detecting profile from XML for EDocument {self.name if self.name else 'NEW'}: {error_msg}\nTraceback: {frappe.get_traceback()}",
-					"EDocument Profile Detection Error",
+					title="EDocument Profile Detection Error",
+					message=f"Error detecting profile from XML for EDocument {self.name if self.name else 'NEW'}: {error_msg}\nTraceback: {frappe.get_traceback()}",
 				)
 
 		# Detected fields override defaults from Frappe
@@ -454,8 +456,8 @@ class EDocument(Document):
 			return result
 		except Exception as e:
 			frappe.log_error(
-				f"Error in get_matching_status for {self.name}: {e!s}",
-				"EDocument Matcher Error",
+				title="EDocument Matcher Error",
+				message=f"Error in get_matching_status for {self.name}: {e!s}",
 			)
 			return {"has_matcher": True, "is_matched": False, "error": str(e)}
 
@@ -541,8 +543,8 @@ class EDocument(Document):
 			}
 		except Exception as e:
 			frappe.log_error(
-				f"Error in save_matching_data for {self.name}: {e!s}",
-				"EDocument Matcher Error",
+				title="EDocument Matcher Error",
+				message=f"Error in save_matching_data for {self.name}: {e!s}",
 			)
 			frappe.throw(_("Error saving matching data: {0}").format(str(e)))
 

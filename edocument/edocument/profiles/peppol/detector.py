@@ -55,7 +55,8 @@ def detect_edocument_fields(xml_bytes):
 
 	except Exception as e:
 		frappe.log_error(
-			f"Failed to detect EDocument fields from PEPPOL XML: {e!s}", "PEPPOL Field Detection Error"
+			title="PEPPOL Field Detection Error",
+			message=f"Failed to detect EDocument fields from PEPPOL XML: {e!s}",
 		)
 		return {}
 

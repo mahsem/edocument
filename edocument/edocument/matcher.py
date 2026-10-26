@@ -44,8 +44,8 @@ def get_xml_matcher(xml_bytes, edocument_profile, edocument=None):
 			return matcher_func(xml_bytes, edocument_profile, edocument)
 		except Exception as e:
 			frappe.log_error(
-				f"Error loading matcher from path {edocument_profile.matcher_path}: {e!s}",
-				"EDocument Matcher Error",
+				title="EDocument Matcher Error",
+				message=f"Error loading matcher from path {edocument_profile.matcher_path}: {e!s}",
 			)
 
 	# Default: Use basic matcher (no matching needed)
